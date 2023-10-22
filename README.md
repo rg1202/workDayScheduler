@@ -1,6 +1,6 @@
 # 05 Third-Party APIs: Work Day Scheduler
 
-## Your Task
+## My Task
 
 Create a simple calendar application that allows a user to save events for each hour of a typical working day (9am-5pm) by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 
@@ -32,22 +32,8 @@ WHEN I refresh the page
 THEN the saved events persist
 ```
 
-The following animation demonstrates the application functionality:
-
-<!-- @TODO: create ticket to review/update image) -->
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
 
 ## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
 
 This Challenge is graded based on the following criteria:
 
@@ -85,15 +71,13 @@ This Challenge is graded based on the following criteria:
 
 * Repository contains multiple descriptive commit messages
 
-* Repository contains quality README file with description, screenshot, and link to deployed application
+* Repository contains quality README file with description, screenshot, and link to deployed application 
 
-## Review
 
-You are required to submit the following for review:
 
-* The URL of the deployed application
+### Screenshot
+![Screenshot of Application](image-1.png)
 
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+### URL of application
+github: https://github.com/rg1202/workDayScheduler/
+URL: https://rg1202.github.io/workDayScheduler/

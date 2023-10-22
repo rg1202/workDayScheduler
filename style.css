@@ -17,7 +17,10 @@ body {
   border: 5px solid yellow;
 }
 
-
+.future {
+  background-color: green;
+  color: white;
+}
 
 #save-btn {
    text-align: center;
