@@ -76,7 +76,7 @@ This Challenge is graded based on the following criteria:
 
 
 ### Screenshot
-![Screenshot of Application](image-1.png)
+![Screenshot of Application](/2023-10-22_15-20-32.gif)
 
 ### URL of application
 github: https://github.com/rg1202/workDayScheduler/
