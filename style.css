@@ -25,7 +25,7 @@ textarea {
 }
 
 .hour {
-  background-color: #ffffff;
+  background-color: gray;
   color: #000000;
   border-top: 1px dashed #000000;
 }
@@ -36,12 +36,12 @@ textarea {
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: red;
   color: white;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: green;
   color: white;
 }
 
