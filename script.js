@@ -24,10 +24,33 @@
     const currentDayElement = $('#currentDay');
     const currentTime = dayjs().format('dddd, MMMM D, YYYY h:mm A');
     currentDayElement.text(currentTime);
-    const workingHours = 8; // Number of working hours
+    const workingHours = 9; // Number of working hours
     const startHour = 9;    // Start at 9 AM
     const $calendar = $('#calendar');
     const currentDay = dayjs(); // Get the current day
+    const $message = $('#message'); // Select the message element
+    const $message2 = $('#message2'); // Select the message element
+    const $clearEventsButton = $('#clearEventsButton'); // Select the "Clear Events" button
+    
+     // Function to clear events from local storage
+     function clearEvents() {
+      for (let i = 0; i < workingHours; i++) {
+          const hour = startHour + i;
+          const eventKey = `event-${hour}`;
+          localStorage.removeItem(eventKey);
+      }
+
+      // Clear the event text in the event columns
+      $('.event').text('');
+      // Show the message when events are cleared
+      $message.text('Events have been cleared from local storage.');
+      $message.show();
+
+      // Hide the message after a brief delay (e.g., 3 seconds)
+      setTimeout(function() {
+          $message.hide();
+      }, 3000);
+  }
 
     // Generate time slots
     for (let i = 0; i < workingHours; i++) {
@@ -53,6 +76,14 @@
         $saveButton.on('click', function() {
             const newEvent = $eventInput.val();
             localStorage.setItem(eventKey, newEvent);
+            
+            // Show the message when the event is saved
+            $message.show();
+
+            // Hide the message after a brief delay (e.g., 3 seconds)
+            setTimeout(function() {
+                $message.hide();
+            }, 3000);
         });
 
         // Determine if the hour is in the past, present, or future
@@ -68,6 +99,21 @@
         $row.append($timeColumn, $eventColumn);
         $calendar.append($row);
     };
+
+    $clearEventsButton.on('click', function() {
+      if (confirm('Are you sure you want to clear all events?')) {
+          localStorage.clear();
+          $message2.text('Local storage has been cleared.');
+            $message2.show();
+
+            // Hide the message after a brief delay (e.g., 3 seconds)
+            setTimeout(function() {
+                $message2.hide();
+                location.reload(); // Refresh the page
+            }, 2000);
+      }
+  });
+    
 });
 
 
