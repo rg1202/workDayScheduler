@@ -68,11 +68,11 @@
         }
 
         // Create an input for new events
-        const $eventInput = $('<input type="text" class="form-control">');
+        const $eventInput = $('<input type="text" class="form-control form-control-lg">');
         $eventInput.val(storedEvent);
 
         // Create a button to save the event
-        const $saveButton = $('<button class="btn btn-primary col-md-2">Save</button>');
+        const $saveButton = $('<button class="btn btn-primary col-md-.5" id="save-btn"><i class="fas fa-save fa-lg"></i></button>');
         $saveButton.on('click', function() {
             const newEvent = $eventInput.val();
             localStorage.setItem(eventKey, newEvent);
