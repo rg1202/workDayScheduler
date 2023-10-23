@@ -16,7 +16,6 @@ body {
   border: 1px solid black;
   opacity: 40%;
 }
-  
 
 .present {
   background-color: red;
@@ -38,11 +37,16 @@ body {
   background-color: rgb(130, 149, 165);
 }
 
-
 .event  {
   border: 1px solid #585252
 }
 
 .hour {
   border: 1px solid #585252
+}
+
+.modal-body {
+  text-align: center;
+  color: red;
+  font-weight: 700;
 }
