@@ -33,25 +33,35 @@
 		const businessHoursEnd = dayjs().set("hour", 18).set("minute", 0);
 		const $message = $("#message"); // Select the message element
 		const $message2 = $("#message2"); // Select the message2 element
-    const $message3 = $("#message3"); // Select the message3 element
+		const $message3 = $("#message3"); // Select the message3 element
 		const currentTime2 = dayjs();
-    //display current date and time
+		//display current date and time
 		currentDayElement.text(currentTime);
-    //update time function
+		//update time function
 		function updateCurrentTime() {
 			const currentTime = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
 			currentDayElement.text(currentTime);
 		}
+
 		// Initial call to set the current date and time
 		updateCurrentTime();
 		// update the current date and time every second
 		setInterval(updateCurrentTime, 1000);
-		if (
-			currentTime2.isBefore(businessHoursStart) ||
-			currentTime2.isAfter(businessHoursEnd)
-		) {
-			// Show the message
-			$message3.show();
+		// Check if the current time is outside business hours
+		//display message if outside of business hours
+		checkBusinessHours();
+		function checkBusinessHours() {
+			const currentTime = dayjs(); // Get the current time as a dayjs object
+			if (
+				currentTime.isBefore(businessHoursStart) ||
+				currentTime.isAfter(businessHoursEnd)
+			) {
+				$message3.show();
+				console.log("Message3 shown");
+			} else {
+				$message3.hide();
+				console.log("Message3 hidden");
+			}
 		}
 		// Function to clear events from local storage
 		function clearEvents() {
@@ -94,7 +104,7 @@
 			const $saveButton = $(
 				'<button class="btn btn-primary col-md-.5" id="save-btn"><i class="fas fa-save fa-lg"></i></button>'
 			);
-      //listen for click to save to local storage
+			//listen for click to save to local storage
 			$saveButton.on("click", function () {
 				const newEvent = $eventInput.val();
 				localStorage.setItem(eventKey, newEvent);
@@ -113,7 +123,7 @@
 			} else {
 				$row.addClass("future");
 			}
-      //append time slot with save button and event
+			//append time slot with save button and event
 			$eventColumn.append($eventInput, $saveButton);
 			$row.append($timeColumn, $eventColumn);
 			$calendar.append($row);
@@ -136,7 +146,7 @@
 				$message2.hide();
 				setTimeout(function () {
 					location.reload();
-      // Reload Page to show cleared events
+					// Reload Page to show cleared events
 				}, 1000);
 			}, 2000);
 		});
