@@ -31,7 +31,16 @@
     const $message = $('#message'); // Select the message element
     const $message2 = $('#message2'); // Select the message element
     const $clearEventsButton = $('#clearEventsButton'); // Select the "Clear Events" button
-    
+    const businessHoursStart = dayjs().set('hour', 9).set('minute', 0);
+    const businessHoursEnd = dayjs().set('hour', 18).set('minute', 0);
+    const $message3 = $('#message3');
+    const currentTime2 = dayjs();
+
+    if (currentTime2.isBefore(businessHoursStart) || currentTime2.isAfter(businessHoursEnd)) {
+      // Show the message
+      $message3.show();
+  }
+
      // Function to clear events from local storage
      function clearEvents() {
       for (let i = 0; i < workingHours; i++) {

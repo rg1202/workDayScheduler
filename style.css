@@ -1,10 +1,16 @@
+header {
+  background-color: #796060;
+  color: white;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  background-color: #796060;
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: darkslategray;
   color: white;
   padding: 5px;
   border: 1px solid white;
