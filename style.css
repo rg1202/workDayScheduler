@@ -9,6 +9,12 @@ body {
   background-color: #796060;
 }
 
+.displayDateTime {
+  font-size: 25px;
+  color: gold;
+  font-weight: 600;
+}
+
 .past {
   background-color: darkslategray;
   color: white;

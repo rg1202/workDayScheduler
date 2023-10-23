@@ -20,117 +20,136 @@
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-  $(document).ready(function() {
-    const currentDayElement = $('#currentDay');
-    const currentTime = dayjs().format('dddd, MMMM D, YYYY h:mm A');
-    currentDayElement.text(currentTime);
-    const workingHours = 9; // Number of working hours
-    const startHour = 9;    // Start at 9 AM
-    const $calendar = $('#calendar');
-    const currentDay = dayjs(); // Get the current day
-    const $message = $('#message'); // Select the message element
-    const $message2 = $('#message2'); // Select the message element
-    const $clearEventsModal = $('#clearEventsModal');
-    const $clearEventsButton = $('#clearEventsButton');
-    const businessHoursStart = dayjs().set('hour', 9).set('minute', 0);
-    const businessHoursEnd = dayjs().set('hour', 18).set('minute', 0);
-    const $message3 = $('#message3');
-    const currentTime2 = dayjs();
+  $(document).ready(function () {
+		const currentDayElement = $("#currentDay");
+		const currentTime = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
+		const workingHours = 9; // Number of working hours
+		const startHour = 9; // Start at 9 AM
+		const $calendar = $("#calendar");
+		const currentDay = dayjs(); // Get the current day
+		const $message = $("#message"); // Select the message element
+		const $message2 = $("#message2"); // Select the message element
+		const $clearEventsModal = $("#clearEventsModal");
+		const $clearEventsButton = $("#clearEventsButton");
+		const businessHoursStart = dayjs().set("hour", 9).set("minute", 0);
+		const businessHoursEnd = dayjs().set("hour", 18).set("minute", 0);
+		const $message3 = $("#message3");
+		const currentTime2 = dayjs();
+    //display current date and time
+		currentDayElement.text(currentTime);
+    //update time function
+		function updateCurrentTime() {
+			const currentTime = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
+			currentDayElement.text(currentTime);
+		}
 
-    if (currentTime2.isBefore(businessHoursStart) || currentTime2.isAfter(businessHoursEnd)) {
-      // Show the message
-      $message3.show();
-  }
+		// Initial call to set the current date and time
+		updateCurrentTime();
 
-     // Function to clear events from local storage
-     function clearEvents() {
-      for (let i = 0; i < workingHours; i++) {
-          const hour = startHour + i;
-          const eventKey = `event-${hour}`;
-          localStorage.removeItem(eventKey);
-      }
+		// Periodically update the current date and time every second
+		setInterval(updateCurrentTime, 1000);
 
-      // Clear the event text in the event columns
-      $('.event').text('');
-      // Show the message when events are cleared
-      $message.text('Events have been cleared from local storage.');
-      $message.show();
+		if (
+			currentTime2.isBefore(businessHoursStart) ||
+			currentTime2.isAfter(businessHoursEnd)
+		) {
+			// Show the message
+			$message3.show();
+		}
 
-      // Hide the message after a brief delay (e.g., 3 seconds)
-      setTimeout(function() {
-          $message.hide();
-      }, 3000);
-  }
+		// Function to clear events from local storage
+		function clearEvents() {
+			for (let i = 0; i < workingHours; i++) {
+				const hour = startHour + i;
+				const eventKey = `event-${hour}`;
+				localStorage.removeItem(eventKey);
+			}
 
-    // Generate time slots
-    for (let i = 0; i < workingHours; i++) {
-        const hour = startHour + i;
-        const timeSlot = dayjs().hour(hour).minute(0);
-        const $row = $('<div class="row">');
-        const $timeColumn = $('<div class="hour col-md-2">').text(timeSlot.format('h A'));
-        const $eventColumn = $('<div class="event col-md-10">');
-        const eventKey = `event-${hour}`;
+			// Clear the event text in the event columns
+			$(".event").text("");
+			// Show the message when events are cleared
+			$message.text("Events have been cleared from local storage.");
+			$message.show();
 
-        // Retrieve stored events from local storage
-        const storedEvent = localStorage.getItem(eventKey);
-        if (storedEvent) {
-            $eventColumn.text(storedEvent);
-        }
+			// Hide the message after a brief delay (e.g., 3 seconds)
+			setTimeout(function () {
+				$message.hide();
+			}, 3000);
+		}
 
-        // Create an input for new events
-        const $eventInput = $('<input type="text" class="form-control form-control-lg">');
-        $eventInput.val(storedEvent);
+		// Generate time slots anad events
+		for (let i = 0; i < workingHours; i++) {
+			const hour = startHour + i;
+			const timeSlot = dayjs().hour(hour).minute(0);
+			const $row = $('<div class="row">');
+			const $timeColumn = $('<div class="hour col-md-2">').text(
+				timeSlot.format("h A")
+			);
+			const $eventColumn = $('<div class="event col-md-10">');
+			const eventKey = `event-${hour}`;
 
-        // Create a button to save the event
-        const $saveButton = $('<button class="btn btn-primary col-md-.5" id="save-btn"><i class="fas fa-save fa-lg"></i></button>');
-        $saveButton.on('click', function() {
-            const newEvent = $eventInput.val();
-            localStorage.setItem(eventKey, newEvent);
-            
-            // Show the message when the event is saved
-            $message.show();
+			// Retrieve stored events from local storage
+			const storedEvent = localStorage.getItem(eventKey);
+			if (storedEvent) {
+				$eventColumn.text(storedEvent);
+			}
 
-            // Hide the message after a brief delay (e.g., 3 seconds)
-            setTimeout(function() {
-                $message.hide();
-            }, 3000);
-        });
+			// Create an input for new events
+			const $eventInput = $(
+				'<input type="text" class="form-control form-control-lg">'
+			);
+			$eventInput.val(storedEvent);
 
-        // Determine if the hour is in the past, present, or future
-        if (timeSlot.isBefore(currentDay, 'hour')) {
-            $row.addClass('past');
-        } else if (timeSlot.isSame(currentDay, 'hour')) {
-            $row.addClass('present');
-        } else {
-            $row.addClass('future');
-        }
+			// Create a button to save the event to local storage
+			const $saveButton = $(
+				'<button class="btn btn-primary col-md-.5" id="save-btn"><i class="fas fa-save fa-lg"></i></button>'
+			);
+      //listen for click to save to local storage
+			$saveButton.on("click", function () {
+				const newEvent = $eventInput.val();
+				localStorage.setItem(eventKey, newEvent);
+				// Show the message when the event is saved
+				$message.show();
+				// Hide the message after a brief delay (e.g., 3 seconds)
+				setTimeout(function () {
+					$message.hide();
+				}, 3000);
+			});
 
-        $eventColumn.append($eventInput, $saveButton);
-        $row.append($timeColumn, $eventColumn);
-        $calendar.append($row);
-    };
- // Handle the click event for clearing events
- $clearEventsButton.on('click', function() {
-  $clearEventsModal.modal('show');
-});
+			// Determine if the hour is in the past, present, or future, this connects with .css
+			if (timeSlot.isBefore(currentDay, "hour")) {
+				$row.addClass("past");
+			} else if (timeSlot.isSame(currentDay, "hour")) {
+				$row.addClass("present");
+			} else {
+				$row.addClass("future");
+			}
+      //append time slot with save button and event
+			$eventColumn.append($eventInput, $saveButton);
+			$row.append($timeColumn, $eventColumn);
+			$calendar.append($row);
+		}
+		// Handle the click event for clearing events
+		$clearEventsButton.on("click", function () {
+			$clearEventsModal.modal("show");
+		});
 
-// Handle the click event for clearing events inside the modal
-$('#clearEventsButton2').on('click', function() {
-  // Clear the event locally
-  localStorage.clear();
-  // Close the modal
-  $clearEventsModal.modal('hide');
-  // Show the message within the modal
-  $message2.text('Local storage has been cleared.');
-  $message2.show();
-  // Hide the message after a brief delay
-  setTimeout(function() {
-      $message2.hide();
-      setTimeout(function(){
-        location.reload();
-      }, 1000)
-  }, 2000);
-});
-});
-  
-
+		// Handle the click event for clearing events inside the modal
+		$("#clearEventsButton2").on("click", function () {
+			// Clear the event locally
+			localStorage.clear();
+			// Close the modal
+			$clearEventsModal.modal("hide");
+			// Show the message within the modal
+			$message2.text("Local storage has been cleared.");
+			$message2.show();
+			// Hide the message after a brief delay
+			setTimeout(function () {
+				$message2.hide();
+				setTimeout(function () {
+					location.reload();
+      // Reload Page to show cleared events
+				}, 1000);
+			}, 2000);
+		});
+	});
