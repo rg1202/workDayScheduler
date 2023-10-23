@@ -32,6 +32,9 @@ body {
 .future {
   background-color: green;
   color: white;
+  padding: 5px;
+  border: 1px solid black;
+  opacity: 80%;
 }
 
 #save-btn {
@@ -43,14 +46,6 @@ body {
   background-color: rgb(130, 149, 165);
 }
 
-.event  {
-  border: 1px solid #585252
-}
-
-.hour {
-  border: 1px solid #585252
-}
-
 .modal-body {
   text-align: center;
   color: red;
@@ -60,4 +55,10 @@ body {
 #calendar {
   font-size: 25px;
   font-weight: 600;
+}
+
+.row {
+  border-radius: 10px;
+  padding: 2px;
+  margin-top: 2px;
 }

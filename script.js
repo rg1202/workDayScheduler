@@ -57,10 +57,10 @@
 				currentTime.isAfter(businessHoursEnd)
 			) {
 				$message3.show();
-				console.log("Message3 shown");
+				console.log("Message3 shown");//check to see if working (works)
 			} else {
 				$message3.hide();
-				console.log("Message3 hidden");
+				console.log("Message3 hidden");//check to see if working (works)
 			}
 		}
 		// Function to clear events from local storage
