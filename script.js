@@ -30,7 +30,8 @@
     const currentDay = dayjs(); // Get the current day
     const $message = $('#message'); // Select the message element
     const $message2 = $('#message2'); // Select the message element
-    const $clearEventsButton = $('#clearEventsButton'); // Select the "Clear Events" button
+    const $clearEventsModal = $('#clearEventsModal');
+    const $clearEventsButton = $('#clearEventsButton');
     const businessHoursStart = dayjs().set('hour', 9).set('minute', 0);
     const businessHoursEnd = dayjs().set('hour', 18).set('minute', 0);
     const $message3 = $('#message3');
@@ -108,21 +109,28 @@
         $row.append($timeColumn, $eventColumn);
         $calendar.append($row);
     };
-
-    $clearEventsButton.on('click', function() {
-      if (confirm('Are you sure you want to clear all events?')) {
-          localStorage.clear();
-          $message2.text('Local storage has been cleared.');
-            $message2.show();
-
-            // Hide the message after a brief delay (e.g., 3 seconds)
-            setTimeout(function() {
-                $message2.hide();
-                location.reload(); // Refresh the page
-            }, 2000);
-      }
-  });
-    
+ // Handle the click event for clearing events
+ $clearEventsButton.on('click', function() {
+  $clearEventsModal.modal('show');
 });
 
+// Handle the click event for clearing events inside the modal
+$('#clearEventsButton2').on('click', function() {
+  // Clear the event locally
+  localStorage.clear();
+  // Close the modal
+  $clearEventsModal.modal('hide');
+  // Show the message within the modal
+  $message2.text('Local storage has been cleared.');
+  $message2.show();
+  // Hide the message after a brief delay
+  setTimeout(function() {
+      $message2.hide();
+      setTimeout(function(){
+        location.reload();
+      }, 1000)
+  }, 2000);
+});
+});
+  
 

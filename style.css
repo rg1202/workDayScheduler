@@ -13,7 +13,8 @@ body {
   background-color: darkslategray;
   color: white;
   padding: 5px;
-  border: 1px solid white;
+  border: 1px solid black;
+  opacity: 40%;
 }
   
 
