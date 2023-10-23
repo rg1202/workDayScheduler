@@ -56,3 +56,8 @@ body {
   color: red;
   font-weight: 700;
 }
+
+#calendar {
+  font-size: 25px;
+  font-weight: 600;
+}
